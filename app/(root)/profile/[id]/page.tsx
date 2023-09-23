@@ -22,7 +22,7 @@ export default async function Page ({ params }: { params: { id: string } } ) {
             accountId={userInfo.id}
             authUserId={user.id}
             name={userInfo.name}
-            imgUrl={userInfo.bio}
+            imgUrl={userInfo.image}
             bio={userInfo.bio}
             username={userInfo.username}
            />
