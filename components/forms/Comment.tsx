@@ -5,13 +5,11 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
+  FormLabel
 } from '../ui/form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import { usePathname, useRouter } from 'next/navigation';
-import { useOrganization } from '@clerk/nextjs';
+import { usePathname } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { CommentValidation } from '@/lib/validations/thread';
@@ -31,10 +29,7 @@ export default function Comment({
   currentUserId,
 }: Props) {
 
-    const router = useRouter();
     const pathname = usePathname();
-  
-    const { organization } = useOrganization();
   
     const form = useForm<z.infer<typeof CommentValidation>>({
       resolver: zodResolver(CommentValidation),

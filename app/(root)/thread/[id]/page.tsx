@@ -6,54 +6,58 @@ import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
+export const revalidate = 0;
 
 export default async function Page({ params }: { params: { id: string } }) {
-    if(!params.id) return null;
+    if (!params.id) return null;
 
     const user = await currentUser();
-    if(!user) return null;
-
+    if (!user) return null;
+  
     const userInfo = await fetchUser(user.id);
-    if(!userInfo?.onboarded) redirect('/onbarding');
-
+    if (!userInfo?.onboarded) redirect("/onboarding");
+  
     const thread = await fetchThreadById(params.id);
-
-    return (<section className='relative'>
+  
+    return (
+      <section className='relative'>
         <div>
-        <ThreadCard 
-            key={thread._id} 
-            id={thread._id} 
-            currentUserId={user?.id || ''} 
+          <ThreadCard
+            id={thread._id}
+            currentUserId={user.id}
             parentId={thread.parentId}
             content={thread.text}
             author={thread.author}
             community={thread.community}
             createdAt={thread.createdAt}
             comments={thread.children}
-            />
+          />
         </div>
+  
         <div className='mt-7'>
-            <Comment 
-            threadId={thread.id}
-            currentUserImg={userInfo.image}
+          <Comment
+            threadId={params.id}
+            currentUserImg={user.imageUrl}
             currentUserId={JSON.stringify(userInfo._id)}
-            />
+          />
         </div>
+  
         <div className='mt-10'>
-            {thread.children.map((childItem: any) => (
-                <ThreadCard 
-                key={childItem._id} 
-                id={childItem._id} 
-                currentUserId={user?.id || ''} 
-                parentId={childItem.parentId}
-                content={childItem.text}
-                author={childItem.author}
-                community={childItem.community}
-                createdAt={childItem.createdAt}
-                comments={childItem.children}
-                isComment
-                />
-            ))}
+          {thread.children.map((childItem: any) => (
+            <ThreadCard
+              key={childItem._id}
+              id={childItem._id}
+              currentUserId={user.id}
+              parentId={childItem.parentId}
+              content={childItem.text}
+              author={childItem.author}
+              community={childItem.community}
+              createdAt={childItem.createdAt}
+              comments={childItem.children}
+              isComment
+            />
+          ))}
         </div>
-    </section>)
-};
+      </section>
+    );
+  }
