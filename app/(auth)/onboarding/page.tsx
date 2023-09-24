@@ -1,10 +1,11 @@
-import { currentUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
+
+import { currentUser } from '@clerk/nextjs';
 
 import { fetchUser } from '@/lib/actions/user.actions';
 import AccountProfile from '@/components/forms/AccountProfile';
 
-async function Page() {
+export default async function Page() {
   const user = await currentUser();
   if (!user) return null;
   
@@ -33,5 +34,3 @@ async function Page() {
     </main>
   );
 }
-
-export default Page;

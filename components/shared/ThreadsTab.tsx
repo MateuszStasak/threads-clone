@@ -2,8 +2,8 @@ import { redirect } from 'next/navigation';
 
 import { fetchCommunityThreads } from '@/lib/actions/community.actions';
 import { fetchUserThreads } from '@/lib/actions/user.actions';
-
 import ThreadCard from '../cards/ThreadCard';
+
 
 interface Result {
   name: string;
@@ -80,4 +80,4 @@ export default async function ThreadsTab({ currentUserId, accountId, accountType
       ))}
     </section>
   );
-};
+}

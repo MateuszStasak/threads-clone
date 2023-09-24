@@ -1,9 +1,11 @@
-'use client'
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+"use client"
+
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import Image from 'next/image';
 
-import { sidebarLinks } from "@/constants";
+import { sidebarLinks } from '@/constants';
+
 
 export default function Bottombar() {
     const pathname = usePathname();

@@ -1,7 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { Button } from "../ui/button";
+import { Button } from '../ui/button';
+
 
 interface Props {
   id: string;
@@ -14,7 +15,7 @@ interface Props {
   }[];
 }
 
-function CommunityCard({ id, name, username, imgUrl, bio, members }: Props) {
+export default function CommunityCard({ id, name, username, imgUrl, bio, members }: Props) {
   return (
     <article className='community-card'>
       <div className='flex flex-wrap items-center gap-3'>
@@ -54,7 +55,7 @@ function CommunityCard({ id, name, username, imgUrl, bio, members }: Props) {
                 width={28}
                 height={28}
                 className={`${
-                  index !== 0 && "-ml-2"
+                  index !== 0 && '-ml-2'
                 } rounded-full object-cover`}
               />
             ))}
@@ -69,5 +70,3 @@ function CommunityCard({ id, name, username, imgUrl, bio, members }: Props) {
     </article>
   );
 }
-
-export default CommunityCard;

@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import { Button } from "../ui/button";
+
 
 interface Props {
   id: string;
@@ -13,7 +14,7 @@ interface Props {
   personType: string;
 }
 
-function UserCard({ id, name, username, imgUrl, personType }: Props) {
+export default function UserCard({ id, name, username, imgUrl, personType }: Props) {
   const router = useRouter();
 
   const isCommunity = personType === "Community";
@@ -51,5 +52,3 @@ function UserCard({ id, name, username, imgUrl, personType }: Props) {
     </article>
   );
 }
-
-export default UserCard;

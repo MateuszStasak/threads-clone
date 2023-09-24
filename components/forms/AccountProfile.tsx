@@ -1,10 +1,11 @@
 "use client";
 
-import * as z from 'zod';
 import Image from 'next/image';
-import { useForm } from 'react-hook-form';
 import { usePathname, useRouter } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
+
+import * as z from 'zod';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
@@ -18,12 +19,11 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-
 import { useUploadThing } from '@/lib/uploadthing';
 import { isBase64Image } from '@/lib/utils';
-
 import { UserValidation } from '@/lib/validations/user';
 import { updateUser } from '@/lib/actions/user.actions';
+
 
 interface Props {
   user: {
@@ -148,7 +148,6 @@ export default function AccountProfile({ user, btnTitle }: Props) {
             </FormItem>
           )}
         />
-
         <FormField
           control={form.control}
           name='name'
@@ -168,7 +167,6 @@ export default function AccountProfile({ user, btnTitle }: Props) {
             </FormItem>
           )}
         />
-
         <FormField
           control={form.control}
           name='username'
@@ -188,7 +186,6 @@ export default function AccountProfile({ user, btnTitle }: Props) {
             </FormItem>
           )}
         />
-
         <FormField
           control={form.control}
           name='bio'
@@ -208,11 +205,10 @@ export default function AccountProfile({ user, btnTitle }: Props) {
             </FormItem>
           )}
         />
-
         <Button type='submit' className='bg-primary-500'>
           {btnTitle}
         </Button>
       </form>
     </Form>
   );
-};
+}

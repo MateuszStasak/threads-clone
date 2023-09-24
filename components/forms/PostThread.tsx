@@ -16,9 +16,9 @@ import {
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-
 import { ThreadValidation } from '@/lib/validations/thread';
 import { createThread } from '@/lib/actions/thread.actions';
+
 
 interface Props {
   userId: string;
@@ -70,7 +70,6 @@ export default function PostThread({ userId }: Props) {
             </FormItem>
           )}
         />
-
         <Button type='submit' className='bg-primary-500'>
           Post Thread
         </Button>

@@ -1,5 +1,12 @@
 "use client"
 
+import { usePathname } from 'next/navigation';
+import Image from 'next/image';
+
+import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+
 import {
   Form,
   FormControl,
@@ -9,13 +16,9 @@ import {
 } from '../ui/form';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import { usePathname } from 'next/navigation';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { CommentValidation } from '@/lib/validations/thread';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Image from 'next/image';
 import { addCommentToThread } from '@/lib/actions/thread.actions';
+
 
 interface Props {
   threadId: string;

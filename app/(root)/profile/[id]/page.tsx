@@ -1,11 +1,13 @@
-import ProfileHeader from "@/components/shared/ProfileHeader";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { profileTabs } from "@/constants";
-import { fetchUser } from "@/lib/actions/user.actions";
-import { currentUser } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
 import Image from 'next/image';
-import ThreadsTab from "@/components/shared/ThreadsTab";
+import { redirect } from 'next/navigation';
+
+import { currentUser } from '@clerk/nextjs';
+
+import ProfileHeader from '@/components/shared/ProfileHeader';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { profileTabs } from '@/constants';
+import { fetchUser } from '@/lib/actions/user.actions';
+import ThreadsTab from '@/components/shared/ThreadsTab';
 
 export default async function Page ({ params }: { params: { id: string } } ) {
     const user = await currentUser();

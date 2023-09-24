@@ -1,8 +1,9 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { formatDateString } from "@/lib/utils";
-import DeleteThread from "../forms/DeleteThread";
+import { formatDateString } from '@/lib/utils';
+import DeleteThread from '../forms/DeleteThread';
+
 
 interface Props {
   id: string;
@@ -42,7 +43,7 @@ export default function ThreadCard({
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
-        isComment ? "px-0 xs:px-7" : "bg-dark-2 p-7"
+        isComment ? 'px-0 xs:px-7' : 'bg-dark-2 p-7'
       }`}
     >
       <div className='flex items-start justify-between'>
@@ -106,7 +107,7 @@ export default function ThreadCard({
               {isComment && comments.length > 0 && (
                 <Link href={`/thread/${id}`}>
                   <p className='mt-1 text-subtle-medium text-gray-1'>
-                    {comments.length} repl{comments.length > 1 ? "ies" : "y"}
+                    {comments.length} repl{comments.length > 1 ? 'ies' : 'y'}
                   </p>
                 </Link>
               )}
@@ -132,13 +133,13 @@ export default function ThreadCard({
               alt={`user_${index}`}
               width={24}
               height={24}
-              className={`${index !== 0 && "-ml-5"} rounded-full object-cover`}
+              className={`${index !== 0 && '-ml-5'} rounded-full object-cover`}
             />
           ))}
 
           <Link href={`/thread/${id}`}>
             <p className='mt-1 text-subtle-medium text-gray-1'>
-              {comments.length} repl{comments.length > 1 ? "ies" : "y"}
+              {comments.length} repl{comments.length > 1 ? 'ies' : 'y'}
             </p>
           </Link>
         </div>

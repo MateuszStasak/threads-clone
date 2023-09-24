@@ -1,10 +1,13 @@
-'use client';
+"use client";
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { sidebarLinks } from '@/constants';
 import { SignOutButton, SignedIn, useAuth } from '@clerk/nextjs';
+
+import { sidebarLinks } from '@/constants';
+
 
 export default function LeftSidebar() {
   const router = useRouter();

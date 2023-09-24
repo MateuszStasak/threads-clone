@@ -1,9 +1,9 @@
-import { Webhook, WebhookRequiredHeaders } from 'svix';
+import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 
+import { Webhook, WebhookRequiredHeaders } from 'svix';
 import { IncomingHttpHeaders } from 'http';
 
-import { NextResponse } from 'next/server';
 import {
   addMemberToCommunity,
   createCommunity,
@@ -11,6 +11,7 @@ import {
   removeUserFromCommunity,
   updateCommunityInfo,
 } from '@/lib/actions/community.actions';
+
 
 type EventType =
   | 'organization.created'
