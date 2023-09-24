@@ -11,10 +11,10 @@ export default function Topbar() {
                 <Image src='/assets/logo.svg' alt='logo' width={28} height={28} />
                 <p className='text-heading3-bold text-light-1 max-xs:hidden'>Threads</p>
             </Link>
-            <UserButton afterSignOutUrl='/'/>
             <div className='flex items-center gap-1'>
                 <div className='block md:hidden'>
                     <SignedIn>
+                    <UserButton afterSignOutUrl='/'/>
                         <SignOutButton>
                             <div className='flex cursor-pointer'>
                                 <Image src='/assets/logout.svg' alt='logout' width={24} height={24} />
