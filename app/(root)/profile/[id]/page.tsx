@@ -9,6 +9,7 @@ import { profileTabs } from '@/constants';
 import { fetchUser } from '@/lib/actions/user.actions';
 import ThreadsTab from '@/components/shared/ThreadsTab';
 
+
 export default async function Page ({ params }: { params: { id: string } } ) {
     const user = await currentUser();
 
