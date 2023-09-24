@@ -1,4 +1,4 @@
-import { UserButton } from '@clerk/nextjs';
+
 import { currentUser } from '@clerk/nextjs';
 
 import ThreadCard from '@/components/cards/ThreadCard';
@@ -12,7 +12,6 @@ export default async function Home() {
   
   return (
     <div>
-      <UserButton afterSignOutUrl='/'/>
       <h1 className='head-text text-left'>Home</h1>
       <section className='mt-9 flex flex-col gap-10'>
         {result.threads.length === 0 ? (

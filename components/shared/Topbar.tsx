@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { OrganizationSwitcher, SignOutButton, SignedIn } from '@clerk/nextjs'
+import { OrganizationSwitcher, SignOutButton, SignedIn, UserButton } from '@clerk/nextjs'
 import { dark } from '@clerk/themes'
 
 export default function Topbar() {
@@ -11,6 +11,7 @@ export default function Topbar() {
                 <Image src='/assets/logo.svg' alt='logo' width={28} height={28} />
                 <p className='text-heading3-bold text-light-1 max-xs:hidden'>Threads</p>
             </Link>
+            <UserButton afterSignOutUrl='/'/>
             <div className='flex items-center gap-1'>
                 <div className='block md:hidden'>
                     <SignedIn>
