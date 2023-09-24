@@ -146,6 +146,36 @@ export async function fetchCommunities({
   }
 }
 
+export async function fetchMostPopularCommunities() {
+  try {
+    connectToDB();
+
+    const popularCommunities = await Community.aggregate([
+      {
+        $project: {
+          id: 1,
+          name: 1,
+          memberCount: { $size: "$members" },
+        },
+      },
+      { $sort: { memberCount: -1 } },
+      { $limit: 5 },
+    ]);
+
+    const topPopularCommunities = popularCommunities.map((community) => ({
+      id: community.id,
+      name: community.name,
+    }));
+
+    return { popularCommunities: topPopularCommunities };
+  } catch (error) {
+    console.error('Error fetching popular communities:', error);
+    throw error;
+  }
+}
+
+
+
 export async function addMemberToCommunity(
   communityId: string,
   memberId: string

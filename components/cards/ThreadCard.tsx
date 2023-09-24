@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useMemo } from 'react';
 
-import { formatDateString } from '@/lib/utils';
+import { formatDateString, formatMilliseconds } from '@/lib/utils';
 import DeleteThread from '../forms/DeleteThread';
 
 
@@ -40,6 +41,13 @@ export default function ThreadCard({
   comments,
   isComment,
 }: Props) {
+
+  
+  const timestampTxt = useMemo(() => {
+    const diff = Date.now() - new Date(createdAt).getTime();
+    return formatMilliseconds(diff);
+  }, [createdAt]);
+
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
@@ -60,16 +68,13 @@ export default function ThreadCard({
 
             <div className='thread-card_bar' />
           </div>
-
           <div className='flex w-full flex-col'>
             <Link href={`/profile/${author.id}`} className='w-fit'>
               <h4 className='cursor-pointer text-base-semibold text-light-1'>
                 {author.name}
               </h4>
             </Link>
-
             <p className='mt-2 text-small-regular text-light-2'>{content}</p>
-
             <div className={`${isComment && 'mb-10'} mt-5 flex flex-col gap-3`}>
               <div className='flex gap-3.5'>
                 <Image
@@ -103,7 +108,9 @@ export default function ThreadCard({
                   className='cursor-pointer object-contain'
                 />
               </div>
-
+              <time dateTime={String(createdAt)} className='mt-1 text-subtle-medium text-gray-1'>
+  {timestampTxt}
+</time>
               {isComment && comments.length > 0 && (
                 <Link href={`/thread/${id}`}>
                   <p className='mt-1 text-subtle-medium text-gray-1'>
@@ -114,7 +121,6 @@ export default function ThreadCard({
             </div>
           </div>
         </div>
-
         <DeleteThread
           threadId={JSON.stringify(id)}
           currentUserId={currentUserId}
@@ -123,7 +129,6 @@ export default function ThreadCard({
           isComment={isComment}
         />
       </div>
-
       {!isComment && comments.length > 0 && (
         <div className='ml-1 mt-3 flex items-center gap-2'>
           {comments.slice(0, 2).map((comment, index) => (
@@ -144,7 +149,6 @@ export default function ThreadCard({
           </Link>
         </div>
       )}
-
       {!isComment && community && (
         <Link
           href={`/communities/${community.id}`}
@@ -154,7 +158,6 @@ export default function ThreadCard({
             {formatDateString(createdAt)}
             {community && ` - ${community.name} Community`}
           </p>
-
           <Image
             src={community.image}
             alt={community.name}

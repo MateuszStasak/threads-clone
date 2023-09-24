@@ -1,12 +1,13 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath } from 'next/cache';
 
-import { connectToDB } from "../mongoose";
+import { connectToDB } from '../mongoose';
 
-import User from "../models/user.model";
-import Thread from "../models/thread.model";
-import Community from "../models/community.model";
+import User from '../models/user.model';
+import Thread from '../models/thread.model';
+import Community from '../models/community.model';
+
 
 export async function fetchThreads(pageNumber = 1, pageSize = 20) {
   connectToDB();
@@ -14,23 +15,23 @@ export async function fetchThreads(pageNumber = 1, pageSize = 20) {
   const skipAmount = (pageNumber - 1) * pageSize;
 
   const threadsQuery = Thread.find({ parentId: { $in: [null, undefined] } })
-    .sort({ createdAt: "desc" })
+    .sort({ createdAt: 'desc' })
     .skip(skipAmount)
     .limit(pageSize)
     .populate({
-      path: "author",
+      path: 'author',
       model: User,
     })
     .populate({
-      path: "community",
+      path: 'community',
       model: Community,
     })
     .populate({
-      path: "children",
+      path: 'children',
       populate: {
-        path: "author",
+        path: 'author',
         model: User,
-        select: "_id name parentId image", 
+        select: '_id name parentId image', 
       },
     });
 
@@ -100,10 +101,10 @@ export async function deleteThread(id: string, path: string): Promise<void> {
   try {
     connectToDB();
 
-    const mainThread = await Thread.findById(id).populate("author community");
+    const mainThread = await Thread.findById(id).populate('author community');
 
     if (!mainThread) {
-      throw new Error("Thread not found");
+      throw new Error('Thread not found');
     }
 
     const descendantThreads = await fetchAllChildThreads(id);
@@ -151,30 +152,30 @@ export async function fetchThreadById(threadId: string) {
   try {
     const thread = await Thread.findById(threadId)
       .populate({
-        path: "author",
+        path: 'author',
         model: User,
-        select: "_id id name image",
+        select: '_id id name image',
       }) 
       .populate({
-        path: "community",
+        path: 'community',
         model: Community,
-        select: "_id id name image",
+        select: '_id id name image',
       }) 
       .populate({
-        path: "children",
+        path: 'children',
         populate: [
           {
-            path: "author", 
+            path: 'author', 
             model: User,
-            select: "_id id name parentId image", 
+            select: '_id id name parentId image', 
           },
           {
-            path: "children", 
+            path: 'children', 
             model: Thread, 
             populate: {
-              path: "author", // 
+              path: 'author', 
               model: User,
-              select: "_id id name parentId image",
+              select: '_id id name parentId image',
             },
           },
         ],
@@ -183,8 +184,8 @@ export async function fetchThreadById(threadId: string) {
 
     return thread;
   } catch (err) {
-    console.error("Error while fetching thread:", err);
-    throw new Error("Unable to fetch thread");
+    console.error('Error while fetching thread:', err);
+    throw new Error('Unable to fetch thread');
   }
 }
 
@@ -200,7 +201,7 @@ export async function addCommentToThread(
     const originalThread = await Thread.findById(threadId);
 
     if (!originalThread) {
-      throw new Error("Thread not found");
+      throw new Error('Thread not found');
     }
 
     const commentThread = new Thread({
@@ -217,7 +218,7 @@ export async function addCommentToThread(
 
     revalidatePath(path);
   } catch (err) {
-    console.error("Error while adding comment:", err);
-    throw new Error("Unable to add comment");
+    console.error('Error while adding comment:', err);
+    throw new Error('Unable to add comment');
   }
 }
